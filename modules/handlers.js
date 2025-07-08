@@ -19,10 +19,6 @@ async function processVIN(ctx, vin, options = {}) {
         return;
     }
 
-    if (!isSubscribed(userId) && options.fromPhoto == true) {
-        user.checks += 1;
-    }
-
     await ctx.reply(lang === 'en' ? '🔍 Searching...' : '🔍 Ищу...');
 
     const { result, url, screenshotPaths, captchaDetected } = await searchOnBidCars(vin);
@@ -348,14 +344,14 @@ function registerHandlers(bot) {
         const user = userData.get(userId);
         user.cancelSearch = false;
         user.canUndo = false;
-        if (!isSubscribed(userId) && user.checks >= freeLimit) {
-            return ctx.reply(
-                lang === 'en' ? `You have used ${freeLimit} free checks.` : `Вы использовали ${freeLimit} бесплатных проверок.`,
-                Markup.inlineKeyboard([
-                    Markup.button.callback(lang === 'en' ? '🚀 Get Unlimited' : '🚀 Получить безлимит', 'subscribe')
-                ])
-            );
-        }
+        // if (!isSubscribed(userId) && user.checks >= freeLimit) {
+        //     return ctx.reply(
+        //         lang === 'en' ? `You have used ${freeLimit} free checks.` : `Вы использовали ${freeLimit} бесплатных проверок.`,
+        //         Markup.inlineKeyboard([
+        //             Markup.button.callback(lang === 'en' ? '🚀 Get Unlimited' : '🚀 Получить безлимит', 'subscribe')
+        //         ])
+        //     );
+        // }
 
         const photo = ctx.message.photo.pop();
         const fileUrl = await ctx.telegram.getFileLink(photo.file_id);
@@ -600,12 +596,12 @@ function registerHandlers(bot) {
         const userId = ctx.chat.id;
         initUser(userId);
         const user = userData.get(userId);
-        await ctx.reply(
-            lang === 'en'
-                ? `You have used ${user.checks} of ${freeLimit} free recognitions.\n\nSend a photo of the VIN code • I will also find the VIN or lot # in a text message.`
-                : `Вы использовали ${user.checks} из ${freeLimit} бесплатных распознаваний.\n\nОтправьте фото вин-кода • также найду VIN или # лота в текстовом сообщении.`,
-            { parse_mode: 'HTML' }
-        );
+        // await ctx.reply(
+        //     lang === 'en'
+        //         ? `You have used ${user.checks} of ${freeLimit} free recognitions.\n\nSend a photo of the VIN code • I will also find the VIN or lot # in a text message.`
+        //         : `Вы использовали ${user.checks} из ${freeLimit} бесплатных распознаваний.\n\nОтправьте фото вин-кода • также найду VIN или # лота в текстовом сообщении.`,
+        //     { parse_mode: 'HTML' }
+        // );
     });
 
 

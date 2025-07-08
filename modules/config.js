@@ -11,7 +11,7 @@ if (!fs.existsSync(SCREENSHOT_FOLDER)) {
     fs.mkdirSync(SCREENSHOT_FOLDER, { recursive: true });
 }
 
-const freeLimit = 20;
+// const freeLimit = 20;
 
 const backupSites = [
   'https://carcheckvin.com/automobile/',
@@ -50,7 +50,7 @@ module.exports = {
     OPENAI_API_KEY,
     ADMIN_CHAT_ID,
     SCREENSHOT_FOLDER,
-    freeLimit,
+    // freeLimit,
     backupSites,
     PAYMENT_PROVIDER_TOKEN: process.env.PAYMENT_PROVIDER_TOKEN
 }; 

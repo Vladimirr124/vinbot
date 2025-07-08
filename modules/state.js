@@ -3,7 +3,8 @@ const userLogs = new Map();
 
 function initUser(userId) {
   if (!userData.has(userId)) {
-    userData.set(userId, { checks: 0, subscription: null, lang: null });
+    // userData.set(userId, { checks: 0, subscription: null, lang: null });
+    userData.set(userId, { subscription: null, lang: null });
     userLogs.set(userId, { successful: 0, failed: 0 });
   }
 }
