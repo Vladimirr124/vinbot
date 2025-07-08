@@ -123,9 +123,10 @@ async function searchOnBidCars(query, isLot = false) {
     if (screenshotPaths.length > 0) {
         result = await analyzeScreenshotsWithGPT(screenshotPaths, false);
     }
+    const currentUrl = page.url();
     await browser.close();
 
-    return { result, url: page.url(), screenshotPaths, captchaDetected: false };
+    return { result, url: currentUrl, screenshotPaths, captchaDetected: false };
 }
 
 async function searchOnBackupSites(vin) {
